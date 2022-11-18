@@ -40,15 +40,47 @@ margin: auto auto;
     background-color: rgb(216, 255, 139);
 }
 
-.field.wall {
+.field.wall-field {
     background-color: red;
+    background-image: url('img/Mauer.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
 }
 
-.field.home {
+.field.home-field {
     background-color: aqua;
+    background-image: url('img/Haus.png');
+    background-repeat: no-repeat;
+    background-position: right top;
 }
 
 .field:hover {
     outline: 3px black dotted;
     outline-offset: -3px;
+    z-index: 100;
+}
+
+.tool-panel {
+    display: flex;
+    gap: 15px;
+    margin: 5px;
+}
+
+.tool-panel > * {
+    padding: 3px;
+    border: 1px solid black;
+    height: 20px;
+    min-width: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tool-panel > *.selected {
+    border: 2px solid black;
+    background-color: gray;
 }
