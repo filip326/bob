@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bob-Bot</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <h1>BOB-Bot</h1>
-    </header>
     <main>
-        <div class="command-list">
-            <ul>
-                <li class="command">SCHRITT</li>
-                <li class="command">SEITLICH-LINKS</li>
-                <li class="command">MARKIERE</li>
-                <li class="command">ENTFERNE</li>
-                <li class="command">ENTFERNE</li>
-                <li class="bool">MARKIERT</li>
-                <li class="bool">MAUER</li>
-                <li class="bool">HAUS</li>
-                <li class="bool">NORDEN</li>
-                <li class="bool">SÜDEN</li>
-                <li class="bool">WESTEN</li>
-                <li class="bool">OSTEN</li>
-            </ul>
+        <div class="editor box">
+            Editor
+        </div>
+        <div class="interpreter box">
+            <div>
+                <div class="playground">
+                    
+                </div>
+                <div class="tool-panel">
+                    <div class="selected-field">
+                        <span class="selected-x">
+                            ?
+                        </span>
+                        &#x2022;
+                        <span class="selected-y">
+                            ?
+                        </span>
+                    </div>
+                    <div class="home">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="command-list box">
+            Command-List
+        </div>
+        <div class="console box">
+            Console
         </div>
     </main>
 </body>
+
 </html>

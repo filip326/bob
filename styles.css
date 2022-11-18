@@ -1,6 +1,54 @@
-.command-list {
-    border: 3px solid black;
-    background-color: rgb(181, 181, 181);
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.command-list 
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.box {
+    outline: 1px solid black;
+    display: flex;
+}
+
+.playground {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    
+}
+
+.interpreter > * {
+margin: auto auto;
+}
+
+.field {
+    outline: 1px solid black;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(216, 255, 139);
+}
+
+.field.wall {
+    background-color: red;
+}
+
+.field.home {
+    background-color: aqua;
+}
+
+.field:hover {
+    outline: 3px black dotted;
+    outline-offset: -3px;
+}
