@@ -11,12 +11,7 @@ let customCommands = [
 
 ]
 
-interpret(`WIEDERHOLE 2-MAL
-WIEDERHOLE 2-MAL
-SCHRITT
-ENDE
-ENDE
-`)
+interpret(``)
 
 /**
  * 
