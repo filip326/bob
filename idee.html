@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=#, initial-scale=1.0">
+    <title>Idee</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        margin: 10px;
+        max-width: calc(100%-10px);
+        min-width: calc(100%-10px);
+        max-height: calc(100%-100px);
+        min-height: calc(100%-100px);
+        background-color: #1e1e1e;
+    }
+
+    main .content-area {
+        border: 1px solid black;
+        margin: 10px;
+    }
+
+    main .table {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 92vh;
+        max-height: 92vh;
+    }
+
+    main .table .spalte {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main #editor {
+        min-width: 40vw;
+        max-width: 40vw;
+        min-height: 90vh;
+        max-height: 90vh;
+        overflow-x: scroll;
+        overflow-y: scroll;
+        color: #ffffff;
+        background-color: #3d3d3d;
+    }
+
+    main #run {
+        min-width: 60px;
+        max-width: 60px;
+        min-height: 60px;
+        max-height: 60px;
+        color: #ffffff;
+        background-color: #3d3d3d;
+    }
+
+    main #task {
+        min-width: 8vw;
+        max-width: 8vw;
+        min-height: 20vh;
+        max-height: 20vh;
+        overflow-y: scroll;
+        margin-top: 15vh;
+        color: #ffffff;
+        background-color: #3d3d3d;
+    }
+
+    main #field {
+        min-width: calc(32px*10);
+        max-width: calc(32px*10);
+        min-height: calc(32px*10);
+        max-height: calc(32px*10);
+        color: #ffffff;
+        background-color: #3d3d3d;
+    }
+
+    main #console {
+        min-width: 30vw;
+        max-width: 30vw;
+        min-height: 20vh;
+        max-height: 20vh;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        margin-top: 15vh;
+        color: #ffffff;
+        background-color: #3d3d3d;
+    }
+</style>
+
+<body>
+    <main>
+        <section class="table">
+            <section class="spalte">
+                <textarea id="editor" class="content-area">Editor</textarea>
+            </section>
+            <section class="spalte">
+                <div class="content-area" id="run">
+                    Run
+                </div>
+                <div class="content-area" id="task">
+                    Task
+                </div>
+            </section>
+            <section class="spalte">
+                <div class="content-area" id="field">
+                    Field
+                </div>
+                <div class="content-area" id="console">
+                    Console
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
