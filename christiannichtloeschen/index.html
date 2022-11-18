@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jside</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="run.js"></script>
+</head>
+
+<body>
+    <main>
+        <!-- Left -->
+        <div class="left">
+            <!-- Editor -->
+            <section class="editor">
+                <textarea id="editor_input" placeholder="editor_"></textarea>
+            </section>
+
+            <!-- Console -->
+            <section class="console">
+                <textarea id="console" placeholder="console_"></textarea>
+            </section>
+        </div>
+        <!-- Middle -->
+        <div class="middle">
+            <!-- Run -->
+            <section class="run">
+                <button id="run_btn" onclick="execute(getCode())"></button>
+                <label for="run_btn">
+                    <img src="img/run.svg" alt="Run" style="color: #ffffff;">
+                </label>
+            </section>
+            <!-- Task -->
+            <section class="task">
+                <textarea readonly></textarea>
+                <div class="controls">
+                    <button id="next_task_btn"></button>
+                    <label for="next_task_btn" style="margin: 5px;">
+                        <img src="img/next.svg" alt="Next" style="color: #ffffff;">
+                    </label>
+                    <button id="back_task_btn"></button>
+                    <label for="back_task_btn" style="margin: 5px;">
+                        <img src="img/back.svg" alt="Back" style="color: #ffffff;">
+                    </label>
+                </div>
+            </section>
+        </div>
+        <!-- Right -->
+        <div class="right">
+            <div class="interpreter box">
+                <div>
+                    <div class="playground">
+                        
+                    </div>
+                    <div class="tool-panel">
+                        <div class="selected-field">
+                            <span class="selected-x">
+                                ?
+                            </span>
+                            &#x2022;
+                            <span class="selected-y">
+                                ?
+                            </span>
+                        </div>
+                        <div class="home">
+                            <img src="img/Haus.png" alt="Haus">
+                        </div>
+                        <div class="add-sign">
+                            +
+                        </div>
+                        <div class="remove-sign">
+                            -
+                        </div>
+                        <div class="wall">
+                            <img src="img/Mauer.png" alt="Mauer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
