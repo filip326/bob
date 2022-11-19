@@ -2,7 +2,16 @@
     display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
+}
 
+.playground > img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.interpreter > * {
+margin: auto auto;
 }
 
 .field {
@@ -12,12 +21,17 @@
     background-color: rgb(216, 255, 139);
 }
 
+.field img {
+    width: 40px;
+    height: 40px;
+}
+
 .field.wall-field {
     background-color: red;
     background-image: url('img/Mauer.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size:cover;
 }
 
 .field.home-field {
@@ -39,7 +53,7 @@
     margin: 5px;
 }
 
-.tool-panel>* {
+.tool-panel > * {
     padding: 3px;
     border: 1px solid black;
     height: 20px;
@@ -52,11 +66,7 @@
     text-align: center;
 }
 
-.tool-panel>*.selected {
+.tool-panel > *.selected {
     border: 2px solid black;
     background-color: gray;
-}
-
-.interpreter>* {
-    margin: auto auto;
 }
