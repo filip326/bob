@@ -11,6 +11,11 @@ for (let i = 0; i < 100; i++) {
 
 document.querySelector('.field[field-x="0"][field-y="0"]').classList.add('home-field')
 
+let bot_img = document.createElement('img')
+bot_img.src = 'img/VorneV2.png'
+
+playground.appendChild(bot_img)
+
 let selectedMethod = '';
 
 document.querySelector('.home').addEventListener('click', (e) => {
@@ -60,4 +65,80 @@ for (let f of document.querySelectorAll('div.field')) {
                 break;
         }
     })
+}
+
+let bob = {
+    x: 0,
+    y: 0,
+    direction: 'S',
+}
+
+function turnLeft() {
+
+    if (bob.direction == 'S') {
+        bob.direction = 'E'
+        bot_img.src = 'img/RechtsV2.png'
+    } else if (bob.direction == 'E') {
+        bob.direction = 'N'
+        bot_img.src = 'img/HintenV2.png'
+    } else if (bob.direction == 'N') {
+        bob.direction = 'W'
+        bot_img.src = 'img/LinksV2.png'
+    } else if (bob.direction == 'W') {
+        bob.direction = 'S'
+        bot_img.src = 'img/VorneV2.png'
+    }
+
+}
+
+function step() {
+    if (bob.x == 0 && bob.direction == 'N') {
+        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+    }
+    if (bob.x == 9 && bob.direction == 'S') {
+        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+    }
+    if (bob.x == 0 && bob.direction == 'W') {
+        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+    }
+    if (bob.x == 9 && bob.direction == 'O') {
+        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+    }
+
+    if (bob.direction == 'N') {
+        bob.x--;
+    }
+    if (bob.direction == 'S') {
+        bob.x++;
+    }
+    if (bob.direction == 'W') {
+        bob.y--;
+    }
+    if (bob.direction == 'E') {
+        bob.y++;
+    }
+
+    console.log(document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"]`))
+    
+    if (document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"]`)?.classList.contains('wall-field')) {
+        console.log('going back')
+        if (bob.direction == 'N') {
+            bob.x++;
+        }
+        if (bob.direction == 'S') {
+            bob.x--;
+        }
+        if (bob.direction == 'W') {
+            bob.y++;
+        }
+        if (bob.direction == 'O') {
+            bob.y--;
+        }
+        alert('Bob kann keinen Schritt machen, vor ihn ist eine Wand.')
+        return;
+    }
+
+    bot_img.style.marginLeft = bob.y * 40 + 'px';
+    bot_img.style.marginTop = bob.x * 40 + 'px';
+
 }
