@@ -17,7 +17,7 @@ interpret(``)
  * 
  * @param {string} code 
  */
-function interpret(code, name=0) {
+function interpret(code) {
 
     let lines = code.toUpperCase().split('\n')
 
@@ -31,7 +31,7 @@ function interpret(code, name=0) {
                 let bedingung = { type: line.split(' ')[1], name: line.split(' ')[2]}
                 let result = getToEnd(lines, i+1)
                 i = result.i;
-                if (check(bedingung)) interpret(result.string)
+
             } else if (/^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$/.test(line)) {
                 // while-loop
                 let bedingung = { type: line.split(' ')[2], name: line.split(' ')[3]}
@@ -63,6 +63,7 @@ function interpret(code, name=0) {
 function getToEnd(lines, i) {
     let loops = 1;
     let string = "";
+    let string2 = ""
     for (i; loops !== 0; i++) {
         let line = lines[i].trim()
         if (line.match(/(^WENN (IST|NICHT) [A-Z]+$)|(^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$)|(^WIEDERHOLE [0-9]+\-MAL$)/)) {
@@ -71,11 +72,19 @@ function getToEnd(lines, i) {
         } else if (line == 'ENDE') {
             loops--;
             if (loops !== 0) string += `${line}\n`
+        } else if (line == 'ENDE, SONST') {
+            loops--;
+            if (loops !== 0) string += `${line}\n`
+            else {
+                let result = getToEnd(lines, i+1)
+                string2 = result.string
+                i = result.i
+            }
         } else {
             string += `${line}\n`
         }
     }
-    return { i, string }
+    return { i, string, string2 }
 }
 
 function check(bedingung) {
