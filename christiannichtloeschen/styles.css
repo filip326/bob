@@ -1,13 +1,13 @@
 .playground {
     display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
 }
 
 .playground > img {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 
 .interpreter > * {
@@ -16,14 +16,20 @@ margin: auto auto;
 
 .field {
     outline: 1px solid black;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: rgb(216, 255, 139);
+    display: flex;
+    flex-direction: column-reverse;
 }
 
-.field img {
-    width: 40px;
-    height: 40px;
+.field .field-mark {
+    margin: 0px 2px;
+    margin-bottom: 1px;
+    height: 3px;
+    background-color: rgb(195, 38, 69);
+    border-radius: 2px;
+    border: 1px solid black;
 }
 
 .field.wall-field {

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="bob.js" defer></script>
     <script src="run.js"></script>
+    <script src="console.js" defer></script>
 </head>
 
 <body>
@@ -23,7 +24,8 @@
 
             <!-- Console -->
             <section class="console">
-                <textarea id="console" placeholder="console_"></textarea>
+                <div class="consolehistory"></div>
+                <input class="consoleinput" type="text" autofocus spellcheck="false">
             </section>
         </div>
         <!-- Middle -->
@@ -55,7 +57,7 @@
             <div class="interpreter box">
                 <div>
                     <div class="playground">
-                        
+
                     </div>
                     <div class="tool-panel">
                         <div class="selected-field">

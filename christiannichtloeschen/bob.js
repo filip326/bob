@@ -104,10 +104,10 @@ function step() {
     if (bob.x == 9 && bob.direction == 'S') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
-    if (bob.x == 0 && bob.direction == 'W') {
+    if (bob.y == 0 && bob.direction == 'W') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
-    if (bob.x == 9 && bob.direction == 'O') {
+    if (bob.y == 9 && bob.direction == 'O') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
 
@@ -123,11 +123,8 @@ function step() {
     if (bob.direction == 'E') {
         bob.y++;
     }
-
-    console.log(document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"]`))
     
     if (document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"]`)?.classList.contains('wall-field')) {
-        console.log('going back')
         if (bob.direction == 'N') {
             bob.x++;
         }
@@ -144,25 +141,72 @@ function step() {
         return;
     }
 
-    bot_img.style.marginLeft = bob.y * 40 + 'px';
-    bot_img.style.marginTop = bob.x * 40 + 'px';
+    bot_img.style.marginLeft = bob.y * 50 + 'px';
+    bot_img.style.marginTop = bob.x * 50 + 'px';
 
 }
 function addSign(x=bob.x, y=bob.y) {
     let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
-    let n = parseInt(field.innerText) ?? 0;
-    if (isNaN(n)) n = 0;
-    n++;
-    if (n < 9 && n > -1)
-        field.innerText = n;
-    else alert('Markierungen müssen zwischen 0 und 8 sein.')
+    if (field.childElementCount == 8) return alert('Es kann maximal 8 Markierungen geben');
+    let mark = document.createElement('div')
+    mark.classList.add('field-mark')
+    field.appendChild(mark)
 }
 function removeSign(x=bob.x, y=bob.y) {
     let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
-    let n = parseInt(field.innerText) ?? 0;
-    if (isNaN(n)) n = 0;
-    n--;
-    if (-1 < n && n < 9)
-        field.innerText = n || "";
-    else alert('Markierungen müssen zwischen 0 und 8 sein.')
+    if (field.childElementCount == 0) return alert('Es kann nicht weniger als 0 Markierugen geben.')
+    field.lastChild.remove()
+}
+
+function check(condition) {
+    switch (condition) {
+        case 'MAUER':
+            if (bob.x == 0 && bob.direction == 'N') {
+                return true
+            }
+            if (bob.x == 9 && bob.direction == 'S') {
+                return true
+            }
+            if (bob.x == 0 && bob.direction == 'W') {
+                return true
+            }
+            if (bob.x == 9 && bob.direction == 'O') {
+                return true
+            }
+            
+            let {x, y} = bob
+
+            if (bob.direction == 'N') {
+                x = x - 1;
+            }
+            if (bob.direction == 'S') {
+                x = x + 1;
+            }
+            if (bob.direction == 'W') {
+                y = y - 1;
+            }
+            if (bob.direction == 'E') {
+                y = y + 1;
+            }
+
+            if (document.querySelector(`[field-x="${x}"][field-y="${y}"]`)?.classList.contains('wall-field')) {
+                return true;
+            }
+
+            return false;
+        case 'HAUS':
+            return document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"]`)?.classList.contains('home-field');
+        case 'NORDEN':
+            return bob.direction == 'N'
+        case 'OSTEN':
+            return bob.direction == 'E'
+        case 'WESTEN':
+            return bob.direction == 'W'
+        case 'SÜDEN':
+            return bob.direction == 'S'
+        
+        case 'MARKIERT':
+            return !!document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"] > *`);
+
+    }
 }
