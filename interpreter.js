@@ -1,15 +1,18 @@
 
 let keywords = [
-    'WENN', 'WIEDERHOLE', 'SOLANGE'
+    'WENN', 'WIEDERHOLE', 'SOLANGE', 'LERNE'
 ]
 
-let basicCommands = [
-    'SCHRITT', 'LINKS-WENDUNG', 'ABLEGEN', 'AUFHEBEN'
-]
+let basicCommands = {
+    'SCHRITT': step,
+    'LINKS-WENDUNG': turnLeft,
+    'PLATZIEREN': addSign,
+    'AUFHEBEN': removeSign,
+}
 
-let customCommands = [
+let customCommands = {
 
-]
+}
 
 interpret(``)
 
@@ -23,7 +26,7 @@ function interpret(code) {
 
     for (let i = 0; i < lines.length; i++) {
 
-        line = lines[i].trim()
+        let line = lines[i].trim()
 
         if (keywords.some(v => line.includes(v))) {
             if (/^WENN (IST|NICHT) [A-Z]+$/.test(line)) {
@@ -47,14 +50,21 @@ function interpret(code) {
                     interpret(result.string)
                 }
             }
+            else if (/^LERNE [A-Z\-]+$/.test(line)) {
+                let name = line.split(' ')[1]
+                let result = getToEnd(lines, i+1)
+                i = result.i;
+                let string = result.string;
+                customCommands[name] = string;
+            }
             else {
                 console.error(`UNVOLLSTÄNDIGE ODER FALSCHE VERWENDUNG VON KEYWORDS: ${line}`)
             }
             
-        } else if (basicCommands.includes(line)) {
-            console.log(`basic command: ${line}`)
-        } else if (customCommands.includes(line)) {
-            console.log(`custom command: ${line}`)
+        } else if (Object.keys(basicCommands).includes(line)) {
+            basicCommands[line]()
+        } else if (Object.keys(customCommands).includes(line)) {
+            interpret(customCommands[line])
         }
 
     }
