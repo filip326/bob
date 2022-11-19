@@ -63,6 +63,12 @@ for (let f of document.querySelectorAll('div.field')) {
             case 'wall':
                 if (!f.classList.contains('home-field')) f.classList.toggle('wall-field')
                 break;
+            case 'add-sign':
+                addSign(f.getAttribute('field-x'), f.getAttribute('field-y'))
+                break;
+            case 'remove-sign':
+                removeSign(f.getAttribute('field-x'), f.getAttribute('field-y'))
+                break;
         }
     })
 }
@@ -141,4 +147,22 @@ function step() {
     bot_img.style.marginLeft = bob.y * 40 + 'px';
     bot_img.style.marginTop = bob.x * 40 + 'px';
 
+}
+function addSign(x=bob.x, y=bob.y) {
+    let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
+    let n = parseInt(field.innerText) ?? 0;
+    if (isNaN(n)) n = 0;
+    n++;
+    if (n < 9 && n > -1)
+        field.innerText = n;
+    else alert('Markierungen müssen zwischen 0 und 8 sein.')
+}
+function removeSign(x=bob.x, y=bob.y) {
+    let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
+    let n = parseInt(field.innerText) ?? 0;
+    if (isNaN(n)) n = 0;
+    n--;
+    if (-1 < n && n < 9)
+        field.innerText = n || "";
+    else alert('Markierungen müssen zwischen 0 und 8 sein.')
 }
