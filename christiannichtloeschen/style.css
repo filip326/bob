@@ -120,3 +120,56 @@ main .controls {
     height: 40px;
     background-color: rgb(216, 255, 139);
 }
+
+
+.console * {
+    font-family: monospace;
+}
+
+.console {
+    display: flex;
+    flex-direction: column;
+}
+
+.consolehistory {
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.console-input-log,
+.console-output-log {
+    box-sizing: border-box;
+    padding: 6px 12px;
+}
+
+.console-input-log:hover,
+.console-output-log:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.console-input-log {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.console-output-log {
+    color: #00ffcc;
+}
+
+.consoleinput {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    outline: none;
+    border: none;
+    border-top: 1px solid #333333;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.consoleinput:hover,
+.consoleinput:focus {
+    background: rgba(255, 255, 255, 0.07);
+}
