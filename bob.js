@@ -104,10 +104,10 @@ function step() {
     if (bob.x == 9 && bob.direction == 'S') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
-    if (bob.x == 0 && bob.direction == 'W') {
+    if (bob.y == 0 && bob.direction == 'W') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
-    if (bob.x == 9 && bob.direction == 'O') {
+    if (bob.y == 9 && bob.direction == 'O') {
         return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
 
