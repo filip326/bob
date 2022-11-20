@@ -1,6 +1,7 @@
+let continueExecuting = false;
 
 let keywords = [
-    'WENN', 'WIEDERHOLE', 'SOLANGE', 'LERNE'
+    'WENN', 'WIEDERHOLE', 'LERNE'
 ]
 
 let basicCommands = {
@@ -13,90 +14,158 @@ let basicCommands = {
 let customCommands = {
 
 }
+/**
+ * 
+ * @param {any[]} lines 
+ */
+async function interpret(lines) {
+    for (let l = 0; l < lines.length; l++) {
 
-interpret(``)
+        if (!continueExecuting) return;
+
+        if (keywords.some(v => lines[l].includes(v))) {
+            // some loop
+            if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l+2] == 'ENDE, SONST') {
+                // if-statement with else
+                // l = bedingung
+                // l+1 = wenn wahr-teil
+                // l+2 = sonst
+                // l+3 = wenn falsch-teil
+
+
+                let bedingungErfüllt = check(lines[l].split(' ')[2])
+
+                if ((bedingungErfüllt && lines[l].split(' ')[1] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[1] == 'NICHT')) {
+                    // bedingung erfüllt
+                    await interpret(lines[l+1])
+                } else {
+                    // bedingung nicht erfüllt
+                    await interpret(lines[l+3])
+                }
+                l = l+3;
+
+            } else if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l+2] == 'ENDE') {
+                // if-statement without else
+                // l = bedingung
+                // l+1 = wenn wahr-teil
+                let bedingungErfüllt = check(lines[l].split(' ')[2])
+
+                if ((bedingungErfüllt && lines[l].split(' ')[1] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[1] == 'NICHT')) {
+                    // bedingung erfüllt
+                    await interpret(lines[l+1])
+                }
+                l = l+1;
+
+            } if (/^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$/.test(lines[l])) {
+                // while-loop
+                let bedingungErfüllt = check(lines[l].split(' ')[3])
+                log(`&aq wiederhole-solange schleife. Bedingung ${lines[l].split(' ')[3]}: ${bedingungErfüllt}`)
+                log(`&aqwiederhole-solange schleife ${(bedingungErfüllt && lines[l].split(' ')[2] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[2] == 'NICHT')}`)
+                while ((check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'IST') || (!check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'NICHT')) {
+                    await interpret(lines[l+1])
+                }
+                l = l + 1
+            } else if (/^WIEDERHOLE [0-9]+\-MAL$/.test(lines[l])) {
+                // for-loop
+                let n = parseInt(lines[l].split(' ')[1].split('-')[0])
+                for (let j = 0; j < n; j++) {
+                    await interpret(lines[l+1])
+                }
+                l = l + 1
+            } else if (/^LERNE [A-Z0-9\-]+$/.test(lines[l])) {
+                customCommands[lines[l].split(' ')[1]] = lines[l+1]
+                l = l + 1;
+            }
+        } else if (Object.keys(basicCommands).includes(lines[l])) {
+            // basic command
+            basicCommands[lines[l]]()
+            await sleep(500)
+
+        } else if (Object.keys(customCommands).includes(lines[l])) {
+            // custom command
+
+        }
+
+    } 
+
+}
 
 /**
  * 
- * @param {string} code 
+ * @param {string} text 
  */
-function interpret(code) {
+function preInterpret(text) {
 
-    let lines = code.toUpperCase().split('\n')
+    let code = text.split('\n')
 
-    for (let i = 0; i < lines.length; i++) {
+    for (let l in code) {
+        code[l] = code[l].toUpperCase().split(';')[0].trim()
+    }
 
-        let line = lines[i].trim()
+    code = code.filter(c => c !== "")
+
+    let codeTree = tree(code)
+
+    return codeTree
+
+}
+
+/**
+ * 
+ * @param {string[]} lines 
+ */
+function tree(lines) {
+    let array = []
+
+    function setLast(o) {
+        if (array.length == 0) {
+            array.push(o)
+            return;
+        }
+
+        let counter = 0;
+        let pushTo = array;
+
+        while (pushTo.length !== 0 && pushTo[pushTo.length - 1].push) {
+            counter++;
+            pushTo = pushTo[pushTo.length - 1]
+        }
+
+        if (pushTo.length !== 0 && pushTo[pushTo.length - 1] == '[ESC]') {
+
+            let newPushTo = array;
+
+            for (let i = 0; i < counter - 1; i++) {
+                newPushTo = newPushTo[newPushTo.length - 1]
+            }
+
+            newPushTo.push(o)
+            return;
+
+        }
+
+        pushTo.push(o)
+
+    }
+
+    for (let line of lines) {
 
         if (keywords.some(v => line.includes(v))) {
-            if (/^WENN (IST|NICHT) [A-Z]+$/.test(line)) {
-                // if-statement
-                let bedingung = { type: line.split(' ')[1], name: line.split(' ')[2]}
-                let result = getToEnd(lines, i+1)
-                i = result.i;
-
-            } else if (/^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$/.test(line)) {
-                // while-loop
-                let bedingung = { type: line.split(' ')[2], name: line.split(' ')[3]}
-                let result = getToEnd(lines, i+1)
-                i = result.i;
-                while (check(bedingung)) interpret(result.string)
-            } else if (/^WIEDERHOLE [0-9]+\-MAL$/.test(line)) {
-                // for-loop
-                let n = parseInt(line.split(' ')[1].split('-')[0])
-                let result = getToEnd(lines, i+1)
-                i = result.i;
-                for (let j = 0; j < n; j++) {
-                    interpret(result.string)
-                }
-            }
-            else if (/^LERNE [A-Z\-]+$/.test(line)) {
-                let name = line.split(' ')[1]
-                let result = getToEnd(lines, i+1)
-                i = result.i;
-                let string = result.string;
-                customCommands[name] = string;
-            }
-            else {
-                console.error(`UNVOLLSTÄNDIGE ODER FALSCHE VERWENDUNG VON KEYWORDS: ${line}`)
-            }
-            
-        } else if (Object.keys(basicCommands).includes(line)) {
-            basicCommands[line]()
-        } else if (Object.keys(customCommands).includes(line)) {
-            interpret(customCommands[line])
-        }
-
-    }
-}
-
-function getToEnd(lines, i) {
-    let loops = 1;
-    let string = "";
-    let string2 = ""
-    for (i; loops !== 0; i++) {
-        let line = lines[i].trim()
-        if (line.match(/(^WENN (IST|NICHT) [A-Z]+$)|(^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$)|(^WIEDERHOLE [0-9]+\-MAL$)/)) {
-            loops++;
-            string += `${line}\n`
-        } else if (line == 'ENDE') {
-            loops--;
-            if (loops !== 0) string += `${line}\n`
-        } else if (line == 'ENDE, SONST') {
-            loops--;
-            if (loops !== 0) string += `${line}\n`
-            else {
-                let result = getToEnd(lines, i+1)
-                string2 = result.string
-                i = result.i
+            setLast(line)
+            setLast([])
+        } else if (line.includes('ENDE')) {
+            setLast('[ESC]')
+            setLast(line)
+            if (line.includes('SONST')) {
+                setLast([])
             }
         } else {
-            string += `${line}\n`
+            setLast(line)
         }
     }
-    return { i, string, string2 }
+    return array;
 }
 
-function check(bedingung) {
-    return true;
+async function sleep(ms) {
+    return new Promise(async acc => setTimeout(() => acc(), ms))
 }

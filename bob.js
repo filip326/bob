@@ -99,16 +99,16 @@ function turnLeft() {
 
 function step() {
     if (bob.x == 0 && bob.direction == 'N') {
-        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+        return log('&reBob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
     if (bob.x == 9 && bob.direction == 'S') {
-        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+        return log('&reBob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
     if (bob.y == 0 && bob.direction == 'W') {
-        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+        return log('&reBob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
-    if (bob.y == 9 && bob.direction == 'O') {
-        return alert('Bob kann keinen Schritt machen, vor ihm ist eine Wand.')
+    if (bob.y == 9 && bob.direction == 'E') {
+        return log('&reBob kann keinen Schritt machen, vor ihm ist eine Wand.')
     }
 
     if (bob.direction == 'N') {
@@ -137,7 +137,7 @@ function step() {
         if (bob.direction == 'O') {
             bob.y--;
         }
-        alert('Bob kann keinen Schritt machen, vor ihn ist eine Wand.')
+        log('&reBob kann keinen Schritt machen, vor ihn ist eine Wand.')
         return;
     }
 
@@ -147,14 +147,14 @@ function step() {
 }
 function addSign(x=bob.x, y=bob.y) {
     let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
-    if (field.childElementCount == 8) return alert('Es kann maximal 8 Markierungen geben');
+    if (field.childElementCount == 8) return log('&reEs kann maximal 8 Markierungen geben');
     let mark = document.createElement('div')
     mark.classList.add('field-mark')
     field.appendChild(mark)
 }
 function removeSign(x=bob.x, y=bob.y) {
     let field = document.querySelector(`[field-x="${x}"][field-y="${y}"]`)
-    if (field.childElementCount == 0) return alert('Es kann nicht weniger als 0 Markierugen geben.')
+    if (field.childElementCount == 0) return log('&reEs kann nicht weniger als 0 Markierugen geben.')
     field.lastChild.remove()
 }
 

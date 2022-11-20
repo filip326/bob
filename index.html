@@ -8,17 +8,24 @@
     <title>Bob-Bot</title>
     <link rel="stylesheet" href="styles.css">
     <script src="bob.js" defer></script>
+    <script src="console.js" defer></script>
+    <script src="interpreter.js" defer></script>
+    <script src="syntaxHelp.js" defer></script>
 </head>
 
 <body>
     <main>
         <div class="editor box">
-            Editor
+            <h1>Editor</h1>
+            <textarea id="editor-box"></textarea>
         </div>
         <div class="interpreter box">
+            <button class="run-button">
+                <img src="img/run.svg" alt="">
+            </button>
+            <h1>Bobs Welt</h1>
             <div>
                 <div class="playground">
-                    
                 </div>
                 <div class="tool-panel">
                     <div class="selected-field">
@@ -45,11 +52,8 @@
                 </div>
             </div>
         </div>
-        <div class="command-list box">
-            Command-List
-        </div>
         <div class="console box">
-            Console
+            <input type="text" id="command-input" placeholder="> COMMAND">
         </div>
     </main>
 </body>
