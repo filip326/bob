@@ -167,10 +167,10 @@ function check(condition) {
             if (bob.x == 9 && bob.direction == 'S') {
                 return true
             }
-            if (bob.x == 0 && bob.direction == 'W') {
+            if (bob.y == 0 && bob.direction == 'W') {
                 return true
             }
-            if (bob.x == 9 && bob.direction == 'O') {
+            if (bob.y == 9 && bob.direction == 'E') {
                 return true
             }
             

@@ -21,7 +21,7 @@ let customCommands = {
 async function interpret(lines) {
     for (let l = 0; l < lines.length; l++) {
 
-        if (!continueExecuting) return;
+        if (!continueExecuting) break;
 
         if (keywords.some(v => lines[l].includes(v))) {
             // some loop
