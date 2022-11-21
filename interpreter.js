@@ -118,7 +118,7 @@ function preInterpret(text) {
     let code = text.split('\n')
 
     for (let l in code) {
-        code[l] = code[l].toUpperCase().split(';')[0].trim()
+        code[l] = code[l].toUpperCase().split('//')[0].trim()
     }
 
     code = code.filter(c => c !== "")

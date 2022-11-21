@@ -126,15 +126,38 @@ main {
 .editor {
     grid-row: span 2;
     display: flex;
-    overflow: hidden;
     flex-direction: column;
 }
 
-.editor textarea {
+#editor-wrapper {
     width: 100%;
-    height: max-content;
-    resize: vertical;
-    min-height: 400px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.codeeditor {
+    display: block;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    padding: 0;
+
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#editor-box {
+    resize: none;
+    opacity: 0.2;
+    background-color: transparent;
 }
 
 .run-button {
