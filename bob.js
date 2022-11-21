@@ -208,5 +208,8 @@ function check(condition) {
         case 'MARKIERT':
             return !!document.querySelector(`[field-x="${bob.x}"][field-y="${bob.y}"] > *`);
 
+        case 'ZUFALL':
+            return Math.random() < 0.5;
+
     }
 }
