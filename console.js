@@ -21,7 +21,7 @@ function log(text) {
 
         let str = part.substring(2)
 
-        switch (`${part.substring(0, 2)}`) {
+        switch (`${part.substring(0, 2)}`.toLowerCase()) {
             case 're':
                 addTo.style.color = 'red';
                 break;

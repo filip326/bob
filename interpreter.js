@@ -14,6 +14,11 @@ let basicCommands = {
 let customCommands = {
 
 }
+
+let paramCommands = {
+    'SAY': (text) => alert(text),
+    'LOG': log
+}
 /**
  * 
  * @param {any[]} lines 
@@ -25,7 +30,7 @@ async function interpret(lines) {
 
         if (keywords.some(v => lines[l].includes(v))) {
             // some loop
-            if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l+2] == 'ENDE, SONST') {
+            if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l + 2] == 'ENDE, SONST') {
                 // if-statement with else
                 // l = bedingung
                 // l+1 = wenn wahr-teil
@@ -37,14 +42,14 @@ async function interpret(lines) {
 
                 if ((bedingungErfüllt && lines[l].split(' ')[1] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[1] == 'NICHT')) {
                     // bedingung erfüllt
-                    await interpret(lines[l+1])
+                    await interpret(lines[l + 1])
                 } else {
                     // bedingung nicht erfüllt
-                    await interpret(lines[l+3])
+                    await interpret(lines[l + 3])
                 }
-                l = l+3;
+                l = l + 3;
 
-            } else if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l+2] == 'ENDE') {
+            } else if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l + 2] == 'ENDE') {
                 // if-statement without else
                 // l = bedingung
                 // l+1 = wenn wahr-teil
@@ -52,9 +57,9 @@ async function interpret(lines) {
 
                 if ((bedingungErfüllt && lines[l].split(' ')[1] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[1] == 'NICHT')) {
                     // bedingung erfüllt
-                    await interpret(lines[l+1])
+                    await interpret(lines[l + 1])
                 }
-                l = l+1;
+                l = l + 1;
 
             } if (/^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$/.test(lines[l])) {
                 // while-loop
@@ -62,32 +67,46 @@ async function interpret(lines) {
                 log(`&aq wiederhole-solange schleife. Bedingung ${lines[l].split(' ')[3]}: ${bedingungErfüllt}`)
                 log(`&aqwiederhole-solange schleife ${(bedingungErfüllt && lines[l].split(' ')[2] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[2] == 'NICHT')}`)
                 while ((check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'IST') || (!check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'NICHT')) {
-                    await interpret(lines[l+1])
+                    await interpret(lines[l + 1])
                 }
                 l = l + 1
             } else if (/^WIEDERHOLE [0-9]+\-MAL$/.test(lines[l])) {
                 // for-loop
                 let n = parseInt(lines[l].split(' ')[1].split('-')[0])
                 for (let j = 0; j < n; j++) {
-                    await interpret(lines[l+1])
+                    await interpret(lines[l + 1])
                 }
                 l = l + 1
             } else if (/^LERNE [A-Z0-9\-]+$/.test(lines[l])) {
-                customCommands[lines[l].split(' ')[1]] = lines[l+1]
+                customCommands[lines[l].split(' ')[1]] = lines[l + 1]
                 l = l + 1;
             }
         } else if (Object.keys(basicCommands).includes(lines[l])) {
             // basic command
             basicCommands[lines[l]]()
             await sleep(500)
-
         } else if (Object.keys(customCommands).includes(lines[l])) {
             // custom command
 
+        } else if (/^[A-Z0-9\-]+ <\-\- .+$/.test(lines[l])) {
+            // basic command with param
+
+            let methodeName = lines[l].split(' <-- ')[0]
+            let params = lines[l].split(' <-- ').slice(1)
+
+            console.log(paramCommands)
+
+            if (Object.keys(paramCommands).includes(methodeName)) {
+                paramCommands[methodeName](...params)
+                await sleep(200)
+            }
+            else {
+                log(`&reParam-command ${methodeName} existiert nicht.`)
+            }
+
         }
 
-    } 
-
+    }
 }
 
 /**
