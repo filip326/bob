@@ -211,6 +211,26 @@ main {
     rotate: 270deg;
 }
 
+.comment {
+    color: #008000;
+}
+
+.keyword {
+    color: #006eff;
+}
+
+.basicCommands {
+    color: #ff0000;
+}
+
+.logic-operator {
+    color: #f6ff00;
+}
+
+.number {
+    color: #ffc400;
+}
+
 @keyframes rotateAnimationButton {
 
     0% {

@@ -30,11 +30,11 @@ textarea.addEventListener('input', (e) => {
         html.replace(/</, `&lt;`)
         html.replace(/>/, `&gt;`)
 
-        html.replace(/\/\/.+$/gm, `<span class="comment">$&</span>`)
-        html.replace(/WIEDERHOLE|WENN|SOLANGE|LERNE|ENDE|-MAL/gm, `<span class="keyword">$&</span>`)
-        html.replace(/SCHRITT|LINKS-WENDUNG|PLATZIEREN|AUFHEBEN/gm, `<span class="basicCommands">$&</span>`)
-        html.replace(/IST|NICHT/gm, `<span class="logic-operator">$&</span>`)
-        html.replace(/[0-9]+/gm, `<span class="number">$&</span>`)
+        html.replace(/\/\/.+$/gm, '<span class="comment">$&</span>')
+        html.replace(/WIEDERHOLE|WENN|SOLANGE|LERNE|ENDE|-MAL/gm, '<span class="keyword">$&</span>')
+        html.replace(/SCHRITT|LINKS-WENDUNG|PLATZIEREN|AUFHEBEN/gm, '<span class="basicCommands">$&</span>')
+        html.replace(/IST|NICHT/gm, '<span class="logic-operator">$&</span>')
+        html.replace(/[0-9]+/gm, '<span class="number">$&</span>')
 
         let div = document.createElement('div')
 
