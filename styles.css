@@ -152,12 +152,23 @@ main {
 
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
+
+    outline: none;
+    border: none;
+
+    color: red;
 }
 
 #editor-box {
     resize: none;
-    opacity: 0.2;
+    color: transparent;
     background-color: transparent;
+    caret-color: black;
+    z-index: 1;
+}
+
+#editor-overlay {
+    z-index: 0;
 }
 
 .run-button {
@@ -186,6 +197,8 @@ main {
     outline: 1px solid black;
     
     transition: rotate 200ms;
+
+    z-index: 1;
     
 }
 
