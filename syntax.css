@@ -1,0 +1,33 @@
+.comment {
+    color: rgb(102, 161, 102);
+}
+
+.keyword {
+    color: blue;
+    font-weight: bold;
+}
+
+.basicCommand {
+    color: rgb(155, 0, 155);
+}
+
+.logic-operator {
+    color: rgb(0, 148, 79)
+}
+
+.number {
+    color: rgb(0, 176, 182);
+}
+
+.invisible {
+    color: transparent;
+    opacity: 0;
+}
+
+.not-wrong {
+    color: black;
+}
+
+#editor-overlay div:nth-child(even) {
+    background-color: rgb(216, 216, 216);
+}
