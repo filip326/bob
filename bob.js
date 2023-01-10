@@ -213,3 +213,17 @@ function check(condition) {
 
     }
 }
+
+function tp(x, y) {
+
+    if (0 > x || x > 10 || 0 > y || y > 10) {
+        log('&reBob kann sich nicht auf eine Position außerhalb des Feldes bewegen.')
+        return;
+    }
+
+    bob.x = x;
+    bob.y = y;
+
+    bot_img.style.marginLeft = bob.y * 50 + 'px';
+    bot_img.style.marginTop = bob.x * 50 + 'px';
+}

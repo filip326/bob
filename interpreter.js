@@ -17,7 +17,8 @@ var customCommands = {
 
 var paramCommands = {
     'SAY': (text) => alert(text),
-    'LOG': log
+    'LOG': log,
+    'TP': (x, y) => tp(x, y)
 }
 /**
  * 
