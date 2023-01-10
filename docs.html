@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob.js Docs</title>
+</head>
+<body>
+    <h1>Bob.js Docs</h1>
+    <section>
+        <h3>Grundbefehle</h3>
+
+        <div class="box">
+            <div class="title">SCHRITT</div>
+            <div class="explanation">
+                Bob geht einen Schritt. Er bewegt sich um ein Kästchen in die Richtung in die er schaut.
+            </div>
+            <div class="example">
+                SCHRITT
+            </div>
+            <div class="errors">
+                Bob kann keine Mauern passieren. Steht Bob vor einer Mauer oder dem Rand der Karte, gibt es einen Fehler.
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="title">LINKS-WENDUNG</div>
+            <div class="explanation">
+                Bob dreht sich um 90° nach links (aus seiner Sicht). So ändert sich die Blickrichtung von Süden nach Osten, Osten nach Norden u.s.w.
+            </div>
+            <div class="example">
+                LINKS-WENDUNG
+            </div>
+            <div class="errors">
+                keine
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="title">
+                PLATZIEREN
+            </div>
+            <div class="explanation">
+                Bob platziert eine von maximal 8 Markierungen. Es erhöht sich die Anzahl von Markierungen um 1.
+            </div>
+            <div class="example">
+                PLATZIEREN
+            </div>
+            <div class="errors">
+                Bob kann keine Markierung platzieren, wenn es bereits 8 Markierungen auf einem Feld gibt. Versuch Bob auf einem vollen Feld 8 Markierungen zu platzieren, gibt es einen Fehler.
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="title">
+                AUFHEBEN
+            </div>
+            <div class="explanation">
+                Bob hebt eine von maximal 8 Markierungen von einem Feld auf. Es verringert sich die Anzahl der Markierungen um 1.
+            </div>
+            <div class="example">
+                AUFHEBEN
+            </div>
+            <div class="errors">
+                Bob kann keine Markierung aufheben, wenn es keine Markierung gibt. Versucht Bob auf einem Feld ohne Markierungen eine Markierung aufzuheben, gibt es einen Fehler.
+            </div>
+        </div>
+    </section>
+</body>
+</html>
