@@ -23,6 +23,9 @@ function syntaxHighlighting() {
 
     let allCommands = [
         ...(textarea.value.match(/LERNE [A-Z0-9\-]+/g)?.map((v) => v.split(' ')[1]) || []),
+        ...Object.keys(basicCommands),
+        ...Object.keys(paramCommands),
+        ...Object.keys(customCommands),
         'WIEDERHOLE', 'WENN', 'SOLANGE', 'LERNE', 'ENDE, SONST', 'ENDE', '-MAL',
         'SCHRITT', 'LINKS-WENDUNG', 'PLATZIEREN', 'AUFHEBEN',
         '(IST|NICHT) (MAUER|MARKIERT|NORDEN|WESTEN|OSTEN|SÜDEN|ZUFALL|HAUS)'

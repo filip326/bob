@@ -4,18 +4,18 @@ let keywords = [
     'WENN', 'WIEDERHOLE', 'LERNE'
 ]
 
-let basicCommands = {
+var basicCommands = {
     'SCHRITT': step,
     'LINKS-WENDUNG': turnLeft,
     'PLATZIEREN': addSign,
     'AUFHEBEN': removeSign,
 }
 
-let customCommands = {
+var customCommands = {
 
 }
 
-let paramCommands = {
+var paramCommands = {
     'SAY': (text) => alert(text),
     'LOG': log
 }
