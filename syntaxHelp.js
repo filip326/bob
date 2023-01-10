@@ -25,7 +25,7 @@ function syntaxHighlighting() {
         ...(textarea.value.match(/LERNE [A-Z0-9\-]+/g)?.map((v) => v.split(' ')[1]) || []),
         'WIEDERHOLE', 'WENN', 'SOLANGE', 'LERNE', 'ENDE, SONST', 'ENDE', '-MAL',
         'SCHRITT', 'LINKS-WENDUNG', 'PLATZIEREN', 'AUFHEBEN',
-        'IST', 'NICHT'
+        '(IST|NICHT) (MAUER|MARKIERT|NORDEN|WESTEN|OSTEN|SÜDEN|ZUFALL|HAUS)'
     ]
 
     for (let line of lines) {
@@ -35,13 +35,15 @@ function syntaxHighlighting() {
         html.replace(/</, `&lt;`)
         html.replace(/>/, `&gt;`);
 
+        html = html.replace(/ <-- .+/, '<span class="args">$&</span>')
 
         html = html.replace(new RegExp(allCommands.join('|'), 'g'), '<span class="not-wrong">$&</span>')
         html = html.replace(/\/\/.+$/gm, `<span class="comment">$&</span>`)
         html = html.replace(/WIEDERHOLE|WENN|SOLANGE|LERNE|ENDE, SONST|ENDE|-MAL/gm, `<span class="keyword">$&</span>`)
         html = html.replace(/SCHRITT|LINKS-WENDUNG|PLATZIEREN|AUFHEBEN/gm, `<span class="basicCommand">$&</span>`)
-        html = html.replace(/IST|NICHT/gm, `<span class="logic-operator">$&</span>`)
+        html = html.replace(/(IST|NICHT) (MAUER|MARKIERT|NORDEN|WESTEN|OSTEN|SÜDEN|ZUFALL|HAUS)/gm, `<span class="logic-operator">$&</span>`)
         html = html.replace(/[0-9]+/gm, `<span class="number">$&</span>`)
+
 
         let div = document.createElement('div')
 

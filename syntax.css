@@ -1,3 +1,7 @@
+.args {
+    color: darkgoldenrod;
+}
+
 .comment {
     color: rgb(102, 161, 102);
 }
@@ -12,7 +16,8 @@
 }
 
 .logic-operator {
-    color: rgb(0, 148, 79)
+    color: teal;
+    font-weight: bold;
 }
 
 .number {

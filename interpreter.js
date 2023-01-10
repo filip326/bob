@@ -52,9 +52,9 @@ async function interpret(lines) {
             } else if (/^WENN (IST|NICHT) [A-Z]+$/.test(lines[l]) && lines[l + 2] == 'ENDE') {
                 // if-statement without else
                 // l = bedingung
-                // l+1 = wenn wahr-teil
+                // l+1 = wenn wahr-teil                
                 let bedingungErfüllt = check(lines[l].split(' ')[2])
-
+                
                 if ((bedingungErfüllt && lines[l].split(' ')[1] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[1] == 'NICHT')) {
                     // bedingung erfüllt
                     await interpret(lines[l + 1])
@@ -64,7 +64,7 @@ async function interpret(lines) {
             } if (/^WIEDERHOLE SOLANGE (IST|NICHT) [A-Z]+$/.test(lines[l])) {
                 // while-loop
                 let bedingungErfüllt = check(lines[l].split(' ')[3])
-                log(`&aq wiederhole-solange schleife. Bedingung ${lines[l].split(' ')[3]}: ${bedingungErfüllt}`)
+                log(`&aqwiederhole-solange schleife. Bedingung ${lines[l].split(' ')[3]}: ${bedingungErfüllt}`)
                 log(`&aqwiederhole-solange schleife ${(bedingungErfüllt && lines[l].split(' ')[2] == 'IST') || (!bedingungErfüllt && lines[l].split(' ')[2] == 'NICHT')}`)
                 while ((check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'IST') || (!check(lines[l].split(' ')[3]) && lines[l].split(' ')[2] == 'NICHT')) {
                     await interpret(lines[l + 1])
@@ -87,7 +87,7 @@ async function interpret(lines) {
             await sleep(500)
         } else if (Object.keys(customCommands).includes(lines[l])) {
             // custom command
-
+            interpret(customCommands[lines[l]])
         } else if (/^[A-Z0-9\-]+ <\-\- .+$/.test(lines[l])) {
             // basic command with param
 
