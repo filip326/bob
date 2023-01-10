@@ -1,71 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob.js Docs</title>
+    <link rel="stylesheet" href="docs.css">
 </head>
+
 <body>
-    <h1>Bob.js Docs</h1>
-    <section>
-        <h3>Grundbefehle</h3>
+    <header>
+        <h1>Bob.js Docs</h1>
+    </header>
+    <main>
+        <section>
+            <h3>Grundbefehle</h3>
 
-        <div class="box">
-            <div class="title">SCHRITT</div>
-            <div class="explanation">
-                Bob geht einen Schritt. Er bewegt sich um ein Kästchen in die Richtung in die er schaut.
+            <div class="box">
+                <div class="title">SCHRITT</div>
+                <div class="explanation">
+                    Bob geht einen Schritt. Er bewegt sich um ein Kästchen in die Richtung in die er schaut.
+                </div>
+                <div class="example">
+                    SCHRITT
+                </div>
+                <div class="errors">
+                    Bob kann keine Mauern passieren. Steht Bob vor einer Mauer oder dem Rand der Karte, gibt es einen
+                    Fehler.
+                </div>
             </div>
-            <div class="example">
-                SCHRITT
-            </div>
-            <div class="errors">
-                Bob kann keine Mauern passieren. Steht Bob vor einer Mauer oder dem Rand der Karte, gibt es einen Fehler.
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="title">LINKS-WENDUNG</div>
-            <div class="explanation">
-                Bob dreht sich um 90° nach links (aus seiner Sicht). So ändert sich die Blickrichtung von Süden nach Osten, Osten nach Norden u.s.w.
+            <div class="box">
+                <div class="title">LINKS-WENDUNG</div>
+                <div class="explanation">
+                    Bob dreht sich um 90° nach links (aus seiner Sicht). So ändert sich die Blickrichtung von Süden nach
+                    Osten, Osten nach Norden u.s.w.
+                </div>
+                <div class="example">
+                    LINKS-WENDUNG
+                </div>
             </div>
-            <div class="example">
-                LINKS-WENDUNG
-            </div>
-            <div class="errors">
-                keine
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="title">
-                PLATZIEREN
+            <div class="box">
+                <div class="title">
+                    PLATZIEREN
+                </div>
+                <div class="explanation">
+                    Bob platziert eine von maximal 8 Markierungen. Es erhöht sich die Anzahl von Markierungen um 1.
+                </div>
+                <div class="example">
+                    PLATZIEREN
+                </div>
+                <div class="errors">
+                    Bob kann keine Markierung platzieren, wenn es bereits 8 Markierungen auf einem Feld gibt. Versuch
+                    Bob auf einem vollen Feld 8 Markierungen zu platzieren, gibt es einen Fehler.
+                </div>
             </div>
-            <div class="explanation">
-                Bob platziert eine von maximal 8 Markierungen. Es erhöht sich die Anzahl von Markierungen um 1.
-            </div>
-            <div class="example">
-                PLATZIEREN
-            </div>
-            <div class="errors">
-                Bob kann keine Markierung platzieren, wenn es bereits 8 Markierungen auf einem Feld gibt. Versuch Bob auf einem vollen Feld 8 Markierungen zu platzieren, gibt es einen Fehler.
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="title">
-                AUFHEBEN
+            <div class="box">
+                <div class="title">
+                    AUFHEBEN
+                </div>
+                <div class="explanation">
+                    Bob hebt eine von maximal 8 Markierungen von einem Feld auf. Es verringert sich die Anzahl der
+                    Markierungen um 1.
+                </div>
+                <div class="example">
+                    AUFHEBEN
+                </div>
+                <div class="errors">
+                    Bob kann keine Markierung aufheben, wenn es keine Markierung gibt. Versucht Bob auf einem Feld ohne
+                    Markierungen eine Markierung aufzuheben, gibt es einen Fehler.
+                </div>
             </div>
-            <div class="explanation">
-                Bob hebt eine von maximal 8 Markierungen von einem Feld auf. Es verringert sich die Anzahl der Markierungen um 1.
+        </section>
+
+        <section>
+            <h3>Bedingungen</h3>
+
+            <div class="box">
+                <div class="title">
+                    Bedingungen
+                </div>
+                <div class="example">
+                    IST|NICHT &lt;Bedingung&gt;
+                </div>
+                <div class="explanation">
+                    In Bob.js gibt es Bedingungen, die geprüft werdne können. Eine Bedingung besteht aus IST oder NICHT
+                    und der zu prüfenden Tatsache.
+                    Ist die Tatsache wahr, ist die Bedingung erfüllt, sonst nicht. Lautet die Bedingung NICHT,
+                    umgekehrt.
+                    Bedingungen können in SCHLEIFEN und WENN-ABFRAGEN genutzt werden.
+                </div>
+                <div class="example">
+                    IST WAND
+                </div>
+                <div class="example">
+                    NICHT HAUS
+                </div>
             </div>
-            <div class="example">
-                AUFHEBEN
+
+            <div class="box">
+                <div class="title">
+                    WAND
+                </div>
+                <div class="explanation">
+                    Bob schaut, ob vor ihm eine Wand ist. Ist vor ihm eine Wand, wahr, kann er einen Schritt machen,
+                    falsch. Der Rand / das Ende der Welt zählt auch als Wand.
+                </div>
             </div>
-            <div class="errors">
-                Bob kann keine Markierung aufheben, wenn es keine Markierung gibt. Versucht Bob auf einem Feld ohne Markierungen eine Markierung aufzuheben, gibt es einen Fehler.
+
+            <div class="box">
+                <div class="title">
+                    HAUS
+                </div>
+                <div class="explanation">
+                    Bob schaut, ob er zu Hause ist. Ist er zu Hause wahr, sonst falsch.
+                </div>
             </div>
-        </div>
-    </section>
+
+            <div class="box">
+                <div class="title">
+                    NORDEN | SÜDEN | OSTEN | WESTEN
+                </div>
+                <div class="explanation">
+                    Bob schaut, ob er in eine der 4 Richtungen schaut. Schaut er in die richtige Richtung wahr, sonst
+                    falsch.
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="title">
+                    ZUFALL
+                </div>
+                <div class="explanation">
+                    Gibt in ungefähr 50% der Aufrufe wahr zurück, sonst falsch. Es wird pseudo-Zufall verwendet.
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <h3>WENN-Dann</h3>
+
+            <div class="box">
+                <div class="title">
+                    WENN, DANN
+                </div>
+                <div class="example">
+                    WENN &lt;Bedingung&gt;<br>
+                    &lt;Befehle&gt;<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Bob prüft, ob die Bedingung erfüllt ist. Wenn ja, wird der Code ausgeführt. Wenn die Bedingung nicht
+                    erfüllt ist, wird der Abschnitt ignoriert.
+                </div>
+                <div class="example">
+                    WENN NICHT WAND<br>
+                    SCHRITT<br>
+                    ENDE<br>
+                </div>
+                <div class="explanation">
+                    Dieser Befehl macht einen Schritt, außer vor ihm ist eine Wand.
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="title">WENN, DANN, SONST</div>
+                <div class="example">
+                    WENN &lt;Bedingung&gt;<br>
+                    &lt;Befehle 1. Codeabschnitt&gt;<br>
+                    ENDE, SONST<br>
+                    &lt;Befehle 2. Codeabschnitt&gt;<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Bob prüft die Bedingung und führt den 1. Codeabschnitt aus, wenn diese erfüllt ist.
+                    Falls die Bedingung nicht erfüllt ist, führt Bob den 2. Codeabschnitt aus. Der jeweils andere Codeabschnitt wird übersprungen.
+                </div>
+                <div class="example">
+                    WENN IST MAUER<br>
+                    LINKS-WENDUNG<br>
+                    ENDE, SONST<br>
+                    SCHRITT<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Falls Bob eine Mauer vor sich hat, dreht er sich um 90° nach Links. Ist vor ihm keine Mauer und er kann einen Schritt machen, macht er einen Schritt.
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <h3>Schleifen</h3>
+            <div class="box">
+                <div class="title">
+                    WIEDERHOLE X-MAL
+                </div>
+                <div class="example">
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT<br>
+                    SCHRITT
+                </div>
+                <div class="example">
+                    WIEDERHOLE 9-MAL<br>
+                    SCHRITT<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Welcher Code ist der schönere?
+                    Wiederhole X-Mal schleifen verwendest du, wenn du im Vorhinein weißt, wie oft eine Sequenz ausgeführt werden soll.
+                    Der Codeabschnitt wird so oft ausgeführt, wie du es angibst.
+                </div>
+                <div class="example">
+                    WIEDERHOLE &lt;Zahl&gt;-MAL<br>
+                    &lt;Befehle&gt;<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Die Befehle werden X-Mal hintereinander wiederholt.
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    WIEDERHOLE SOLANGE
+                </div>
+                <div class="example">
+                    WIEDERHOLE SOLANGE &lt;Bedingung&gt;<br>
+                    &lt;Befehle&gt;<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Die Befehle werden so lange ausgeführt, solange die Bedingung erfüllt ist. Ist die Bedingung nicht erfüllt, wird der restliche Code weiter fortgesetzt / das Programm beendet.
+                </div>
+                <div class="errors">
+                    Achte darauf, dass dein Programm nicht unendlich lange läuft. Deine Bedingung sollte nie unendlich lange laufen.
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Methoden</h3>
+            <div class="box">
+                <div class="title">LERNE</div>
+                <div class="example">
+                    LERNE &lt;Name&gt;<br>
+                    &lt;Befehle&gt;<br>
+                    ENDE
+                </div>
+                <div class="explanation">
+                    Mit dem Lerne-Befehl lernt Bob etwas neues. Du kannst überall in deinem Code auf die gelernete Methode zugreifen, indem du sie wie einen anderen Befehl aufrufst. 
+                </div>
+                <div class="example">
+                    &lt;Name&gt;
+                </div>
+                <div class="explanation">
+                    Der Name sollte nur Buchstaben, keine Zahlen oder Sonderzeichen enthalten.
+                </div>
+                <div class="errors">
+                    Vermeide es, innerhalb einer Methode sich selbst aufzurufen. Dies kann zu einer unendlichen Schleife oder einer Überlastung des Speichers führen.
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Debugging</h3>
+            <div class="box">
+                <div class="title">
+                    ALERT
+                </div>
+                <div class="example">
+                    SAY &lt;-- &lt;Text&gt; 
+                </div>
+                <div class="explanation">
+                    Dieser Befehl gibt den gewünschten Text aus.
+                </div>
+                <div class="example">
+                    SAY &lt;-- Hello World
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    LOG
+                </div>
+                <div class="example">
+                    LOG &lt;-- &lt;Text&gt;
+                </div>
+                <div class="explanation">
+                    Dieser Befehl schreibt den gewünschten Text in die Konsole.
+                </div>
+                <div class="example">
+                    LOG &lt;-- Hello World
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    TELEPORT
+                </div>
+                <div class="example">
+                    TP &lt;-- &lt;x&gt; &lt;-- &lt;y&gt;
+                </div>
+                <div class="explanation">
+                    Dieser Befehl platzier Bob sofort auf das gewümschte Feld. Die x und y Koordinaten müssen zwischen einschließlich 0 und 9 sein.
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>
